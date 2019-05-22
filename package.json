@@ -1,5 +1,9 @@
 {
   "name": "todo-fs-pwa",
+  "author": {
+    "email": "giladl82@gmail.com",
+    "name": "Gilad Lev-Ari"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {

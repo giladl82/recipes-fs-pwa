@@ -22,7 +22,9 @@
 }
 
 .list-item__image {
-  width: 100%;
+  max-width: 16em;
+  border: solid 1px #ccc;
+  border-radius: .3em;
 }
 
 .list-item__buttons {
@@ -60,7 +62,7 @@
     grid-column-start: 1;
     margin: 0 1em;
     order: 1;
-    width: 6em;
+    max-height: 6em;
   }
 
   .list-item__buttons {

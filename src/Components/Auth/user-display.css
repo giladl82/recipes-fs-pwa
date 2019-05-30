@@ -1,0 +1,22 @@
+.user-display {
+  margin: 1.5em;
+  align-self: center;
+}
+
+.user-display__avatar {
+  height: 2em;
+  align-self: center;
+}
+
+.user-display__signOut {
+  text-decoration: underline;
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.user-display__signOut:hover {
+  color: antiquewhite;
+}

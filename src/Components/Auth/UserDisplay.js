@@ -1,5 +1,5 @@
 import React from 'react';
-import { signOut } from '../../Api/firebase';
+import { signOut } from '../../services/auth';
 import './user-display.css';
 
 export default function UserDisplay({ user }) {

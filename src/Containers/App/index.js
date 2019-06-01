@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Router } from '@reach/router';
-import { firebaseAuth } from '../../Api/firebase';
+import { Router, navigate } from '@reach/router';
+import { onAuthStateChanged } from '../../services/auth';
 
 import Main from '../Main';
 import New from '../New';
-import Login from '../Auth/Login';
+import LoginOptions from '../Auth/LoginOptions';
 import Item from '../Item';
 
 import UserDisplay from '../../Components/Auth/UserDisplay';
@@ -16,10 +16,14 @@ function App() {
   const [ready, setReady] = useState();
 
   useEffect(() => {
-    const unsubscribeAuthChange = firebaseAuth.onAuthStateChanged(user => {
+    const unsubscribeAuthChange = onAuthStateChanged(user => {
       setReady(true);
       setUser(user);
-    });
+
+      if(!user && window.location.pathname.indexOf('/logins') < 0) {
+        navigate('/logins')
+      }
+    }); 
     return () => {
       unsubscribeAuthChange();
     };
@@ -35,7 +39,7 @@ function App() {
         <main className='container'>
           <Router>
             <Main path='/' user={user} />
-            <Login path='login' user={user} />
+            <LoginOptions path='login' user={user} />
             <Item path='item/:id' user={user} />
             <New path='new' user={user} />
           </Router>

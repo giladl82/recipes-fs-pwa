@@ -5,6 +5,8 @@ const parseDoc = doc => ({
   ...doc.data()
 });
 
+export const createRecipe = async (userId, recipe) => firestore.collection('recipes').add({ ...recipe, userId });
+
 export const getAllRecipesLive = () => {
   return new Promise(resolve => {
     const unSubscribe = firestore.collection('recipes').onSnapshot(snapshot => {
@@ -32,10 +34,9 @@ export const getAllRecipes = async userId => {
 export const getRecipe = async (id, userId) => {
   const recipeRef = firestore.doc(`recipes/${id}`);
   const doc = await recipeRef.get();
-  
+
   return parseDoc(doc);
 };
-
 
 const demoData = [
   {

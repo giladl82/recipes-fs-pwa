@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from '@reach/router';
-import { getRecipe } from '../../Api/recipes';
+import { getRecipe } from '../../services/recipes';
 
 import './recipe.css';
 

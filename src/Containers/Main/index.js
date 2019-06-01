@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { navigate, Link } from '@reach/router';
 import List from '../../Components/List';
-import { getAllRecipes } from '../../Api/recipes';
+import { getAllRecipes } from '../../services/recipes';
 import './main.css';
 
 export default function Main({ user }) {
@@ -10,8 +10,8 @@ export default function Main({ user }) {
 
   useEffect(() => {
     async function getRecipes() {
-      const docs = await getAllRecipes(user.uid);
       if (user) {
+        const docs = await getAllRecipes(user.uid);
         setRecipes(docs);
       }
 
@@ -24,7 +24,7 @@ export default function Main({ user }) {
     return () => {
       return null;
     };
-  }, []);
+  }, [user, recipes.length]);
 
   /*
   useEffect(() => {
@@ -41,14 +41,6 @@ export default function Main({ user }) {
     return () => unSubscribe();
   }, []);
   */
-
-  useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    }
-
-    return () => {};
-  }, [user]);
 
   return (
     <>

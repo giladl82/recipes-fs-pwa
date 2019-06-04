@@ -5,7 +5,7 @@ const parseDoc = doc => ({
   ...doc.data()
 });
 
-export const createRecipe = async (userId, recipe) => firestore.collection('recipes').add({ ...recipe, userId });
+export const createRecipe = async (uid, recipe) => firestore.collection('recipes').add({ ...recipe, uid });
 
 export const getAllRecipesLive = () => {
   return new Promise(resolve => {
@@ -23,15 +23,15 @@ export const getAllRecipesLive = () => {
   });
 };
 
-export const getAllRecipes = async userId => {
-  const myRecipes = firestore.collection('recipes').where('userId', '==', userId);
+export const getAllRecipes = async uid => {
+  const myRecipes = firestore.collection('recipes').where('uid', '==', uid);
   const snapshot = await myRecipes.get();
   const docs = snapshot.docs.map(doc => parseDoc(doc));
 
   return docs;
 };
 
-export const getRecipe = async (id, userId) => {
+export const getRecipe = async (id, uid) => {
   const recipeRef = firestore.doc(`recipes/${id}`);
   const doc = await recipeRef.get();
 

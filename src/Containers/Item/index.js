@@ -6,6 +6,7 @@ import './recipe.css';
 
 export default function Item({ id, user }) {
   const [recipe, setRecipe] = useState({});
+ 
   useEffect(() => {
     async function getCurrentRecipe() {
       const result = await getRecipe(id, user.uid);
@@ -15,6 +16,7 @@ export default function Item({ id, user }) {
       getCurrentRecipe();
     }
   }, [id, user]);
+ 
   return (
     <>
       <Link className='back-link' to='/'>

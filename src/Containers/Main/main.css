@@ -1,17 +1,25 @@
+.list-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .link-button {
   display: inline-block;
-  background-color: #666;
-  padding: .5em 2em;
+  background-color: #85977f;
+  border: solid 0.2rem #fff;
+  padding: 0.5em 1em;
   color: #fff;
   font-size: 1.3em;
   text-decoration: none;
-  margin: 1em 0;
+  margin: 1em auto 1em 0;
+  justify-self: flex-end;
 }
 
-@media only screen and (max-width: 600px) { 
+@media only screen and (max-width: 600px) {
   .link-button {
     display: block;
     text-align: center;
     font-size: 2em;
+    margin: 1em;
   }
 }

@@ -1,38 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { Router, navigate } from '@reach/router';
-import { onAuthStateChanged } from '../../services/auth';
+import { onAuthStateChanged, createUserProfile } from '../../services/auth';
 
+import logo from './logo.svg';
 import Main from '../Main';
 import New from '../New';
 import LoginOptions from '../Auth/LoginOptions';
+import LoginByEmail from '../Auth/LoginByEmail';
+import CreateUser from '../Auth/CreateUser';
 import Item from '../Item';
 
 import UserDisplay from '../../Components/Auth/UserDisplay';
 
-import './style.css';
+import './app.css';
 
 function App() {
   const [user, setUser] = useState();
   const [ready, setReady] = useState();
 
   useEffect(() => {
-    const unsubscribeAuthChange = onAuthStateChanged(user => {
+    const unsubscribeAuthChange = onAuthStateChanged(async authUser => {
+      const user = await createUserProfile(authUser);
+      
       setReady(true);
       setUser(user);
 
-      if(!user && window.location.pathname.indexOf('/logins') < 0) {
-        navigate('/logins')
+      if (!user && window.location.pathname.indexOf('/login') < 0) {
+        navigate('/login');
+      } else if (user && window.location.pathname.indexOf('/login') >= 0) {
+        navigate('/');
       }
-    }); 
+    });
     return () => {
       unsubscribeAuthChange();
     };
-  });
+  }, []);
 
   return (
     <div className='app'>
       <header className='header'>
-        <h1 className='header__title'>ספר המתכונים שלי</h1>
+        <h1 className='header__title'>
+          <img className='header__logo' src={logo} alt='ספר המתכונים שלי' />
+          ספר המתכונים שלי
+        </h1>
         <UserDisplay user={user} />
       </header>
       {ready && (
@@ -40,6 +50,8 @@ function App() {
           <Router>
             <Main path='/' user={user} />
             <LoginOptions path='login' user={user} />
+            <CreateUser path='login/create' />
+            <LoginByEmail path='login/email' />
             <Item path='item/:id' user={user} />
             <New path='new' user={user} />
           </Router>

@@ -47,12 +47,12 @@ export default function Main({ user }) {
       {isLoading ? (
         <h1>Loading...</h1>
       ) : (
-        <>
+        <div className='list-container'>
           <Link className='link-button' to='new'>
             להוספה של מתכון חדש
           </Link>
           <List recipes={recipes} />
-        </>
+        </div>
       )}
     </>
   );

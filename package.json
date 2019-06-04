@@ -1,5 +1,5 @@
 {
-  "name": "todo-fs-pwa",
+  "name": "recipes-fs-pwa",
   "author": {
     "email": "giladl82@gmail.com",
     "name": "Gilad Lev-Ari"
@@ -7,9 +7,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reach/router": "^1.2.1",
+    "firebase": "^6.0.2",
+    "firebase-tools": "^6.10.0",
+    "nib-core": "^0.3.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "sanitize-html": "^1.20.1"
   },
   "scripts": {
     "start": "react-scripts start",

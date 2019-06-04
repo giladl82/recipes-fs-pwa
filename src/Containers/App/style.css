@@ -1,0 +1,27 @@
+.app {
+  direction: rtl;
+}
+
+.header {
+  background-color: #000000;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__title {
+  font-size: 1.4rem;
+  padding: 1.4rem;
+  margin: 0;
+}
+
+.container {
+  width: 80vw;
+  margin: 1rem auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100vw;
+  }
+}

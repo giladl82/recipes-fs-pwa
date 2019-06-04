@@ -1,6 +1,5 @@
-import firebase, { firestore } from './firebase';
+import firebase, { firestore, firebaseAuth, firebaseStorage } from './firebase';
 
-export const firebaseAuth = firebase.auth();
 export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 export const createUserProfile = async (user, additionalData) => {
@@ -13,7 +12,6 @@ export const createUserProfile = async (user, additionalData) => {
   const snapshot = await userRef.get();
 
   if (!snapshot.exists) {
-    debugger
     const { displayName, email, photoURL } = user;
     const createdAt = new Date();
     try {
@@ -49,15 +47,11 @@ export const getCurrentUser = () => firebaseAuth.currentUser;
 
 export const signInWithGoogle = () => firebaseAuth.signInWithPopup(googleAuthProvider);
 
-export const signup = async ({ email, password, displayName, photoURL }) => {
+export const signup = async ({ email, password, displayName }) => {
   try {
     const { user } = await firebaseAuth.createUserWithEmailAndPassword(email, password);
-    // user.updateProfile({
-    //   displayName,
-    //   photoURL
-    // });
 
-    createUserProfile(user, {
+    return createUserProfile(user, {
       displayName
     });
   } catch (error) {
@@ -66,3 +60,32 @@ export const signup = async ({ email, password, displayName, photoURL }) => {
 };
 
 export const signOut = () => firebaseAuth.signOut();
+
+export const updateProfile = (uid, displayName, photoURL) => {
+  if (!uid) return null;
+  try {
+    const userRef = firestore.doc(`users/${uid}`);
+    userRef.update({
+      displayName,
+      photoURL
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateUserProfile = (uid, file) => {
+  if (file) {
+    const fileType = file.name.split('.')[1]
+    const fileName = `${new Date().getTime()}.${fileType}`;
+    return firebaseStorage
+      .ref(`/users/${uid}/${fileName}`)
+      .put(file)
+      .then(response => response.ref.getDownloadURL())
+      .then(photoURL =>
+        firestore.doc(`users/${uid}`).update({
+          photoURL
+        })
+      );
+  }
+};

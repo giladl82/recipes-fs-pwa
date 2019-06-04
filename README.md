@@ -10,7 +10,6 @@ If you only like to learn about react hooks, you should take a look at the "hook
 If you like to learn more about PWA you can go the master branch which includes the full project (PWA is the final part of this project)
 
 ## Todo
-- Create input Component
 - Upload file to server
 - Delete item 
 - Update item

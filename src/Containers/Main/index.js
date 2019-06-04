@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { navigate, Link } from '@reach/router';
+import { Link } from '@reach/router';
 import List from '../../Components/List';
 import { getAllRecipes } from '../../services/recipes';
 import './main.css';

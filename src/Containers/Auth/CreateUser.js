@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { signup } from '../../services/auth';
+import React, { useState, useRef } from 'react';
+import { signup, updateUserProfile } from '../../services/auth';
 import './login-options.css';
 
 export default function CreateUser() {
   const [formValues, setValues] = useState({});
-
+  const fileRef = useRef(null);
   const handleInputChange = event => {
     const newValues = { ...formValues, [event.target.id]: event.target.value };
     setValues(newValues);
@@ -14,7 +14,10 @@ export default function CreateUser() {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    await signup(formValues);
+    const user = await signup(formValues);
+    if (fileRef.current.files.length) {
+      await updateUserProfile(user.uid, fileRef.current.files[0]);
+    }
   };
 
   return (
@@ -80,6 +83,7 @@ export default function CreateUser() {
           className='login-form__input'
           onChange={handleInputChange}
           type='file'
+          ref={fileRef}
           id='photoURL'
           accept='.gif, .jpg, .png'
         />

@@ -23,7 +23,7 @@ export default function List({ recipes }) {
       {recipes.map(item => {
         console.log(item.id);
         return (
-          <div key={'fff'} data-id={item.id} onClick={handleItemClick} className='list-item' key={item.id}>
+          <div data-id={item.id} onClick={handleItemClick} className='list-item' key={item.id}>
             <h3 className='list-item__title'>{item.title}</h3>
             <img className='list-item__image' src={item.image} alt={item.title} />
             <div className='list-item__buttons'>
@@ -38,7 +38,7 @@ export default function List({ recipes }) {
               </button>
             </div>
           </div>
-        )
+        );
       })}
     </div>
   );

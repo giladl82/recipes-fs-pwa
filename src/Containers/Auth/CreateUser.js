@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { signup, updateUserProfile } from '../../services/auth';
+import { signup } from '../../services/auth';
 import './login-options.css';
 
 export default function CreateUser() {
@@ -14,10 +14,9 @@ export default function CreateUser() {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    const user = await signup(formValues);
-    if (fileRef.current.files.length) {
-      await updateUserProfile(user.uid, fileRef.current.files[0]);
-    }
+    const photoImage =
+      fileRef.current && fileRef.current.files && fileRef.current.files[0] ? fileRef.current.files[0] : null;
+    await signup({ ...formValues, photoImage });
   };
 
   return (

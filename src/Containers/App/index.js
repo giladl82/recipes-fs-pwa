@@ -19,9 +19,9 @@ function App() {
   const [ready, setReady] = useState();
 
   useEffect(() => {
-    const unsubscribeAuthChange = onAuthStateChanged(async authUser => {
+    const unsubscribeMethods = onAuthStateChanged(async authUser => {
       const user = await createUserProfile(authUser);
-      
+
       setReady(true);
       setUser(user);
 
@@ -32,7 +32,11 @@ function App() {
       }
     });
     return () => {
-      unsubscribeAuthChange();
+      unsubscribeMethods.forEach(method => {
+        if (method && typeof method === 'function') {
+          method();
+        }
+      });
     };
   }, []);
 

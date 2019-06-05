@@ -41,19 +41,37 @@ export const getUserProfile = async uid => {
   }
 };
 
-export const onAuthStateChanged = callback => firebaseAuth.onAuthStateChanged(callback);
+export const onAuthStateChanged = callback => {
+  let unsubscribeAuthStateChanged, unSubscribeUserDataChange;
+  unsubscribeAuthStateChanged = firebaseAuth.onAuthStateChanged(authUser => {
+    if (authUser) {
+      unSubscribeUserDataChange = firestore.doc(`users/${authUser.uid}`).onSnapshot(snapshot => {
+        callback({ uid: authUser.uid, ...snapshot.data() });
+      });
+    } else {
+      callback(null);
+    }
+  });
+
+  return [unsubscribeAuthStateChanged, unSubscribeUserDataChange];
+};
 
 export const getCurrentUser = () => firebaseAuth.currentUser;
 
 export const signInWithGoogle = () => firebaseAuth.signInWithPopup(googleAuthProvider);
 
-export const signup = async ({ email, password, displayName }) => {
+export const signup = async ({ email, password, displayName, photoImage }) => {
   try {
     const { user } = await firebaseAuth.createUserWithEmailAndPassword(email, password);
 
-    return createUserProfile(user, {
-      displayName
+    const photoURL = await uploadUserProfileImage(user.uid, photoImage);
+
+    const userProfile = createUserProfile(user, {
+      displayName,
+      photoURL
     });
+
+    return userProfile;
   } catch (error) {
     console.error(error);
   }
@@ -74,18 +92,14 @@ export const updateProfile = (uid, displayName, photoURL) => {
   }
 };
 
-export const updateUserProfile = (uid, file) => {
+export const uploadUserProfileImage = (uid, file) => {
   if (file) {
-    const fileType = file.name.split('.')[1]
+    const fileType = file.name.split('.')[1];
     const fileName = `${new Date().getTime()}.${fileType}`;
     return firebaseStorage
       .ref(`/users/${uid}/${fileName}`)
       .put(file)
       .then(response => response.ref.getDownloadURL())
-      .then(photoURL =>
-        firestore.doc(`users/${uid}`).update({
-          photoURL
-        })
-      );
+      .then(photoURL => photoURL);
   }
 };

@@ -11,6 +11,8 @@ export default function RecipeEditor({ uid, onSubmit }) {
   const setFormValues = (key, value) => {
     const newValues = { ...formValues, [key]: value };
     setValues(newValues);
+
+    return newValues;
   };
 
   const handleInputChange = event => {
@@ -28,10 +30,9 @@ export default function RecipeEditor({ uid, onSubmit }) {
     const photoImage =
       fileRef.current && fileRef.current.files && fileRef.current.files[0] ? fileRef.current.files[0] : null;
     const photoURL = await uploadFile(uid, photoImage);
+    const dataToSave = setFormValues('image', photoURL);
 
-    setFormValues('image', photoURL);
-
-    onSubmit(formValues);
+    onSubmit(dataToSave);
   };
 
   return (

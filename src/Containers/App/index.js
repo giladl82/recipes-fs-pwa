@@ -5,6 +5,7 @@ import { onAuthStateChanged, createUserProfile } from '../../services/auth';
 import logo from './logo.svg';
 import Main from '../Main';
 import New from '../New';
+import Edit from '../Edit';
 import LoginOptions from '../Auth/LoginOptions';
 import LoginByEmail from '../Auth/LoginByEmail';
 import CreateUser from '../Auth/CreateUser';
@@ -57,6 +58,7 @@ function App() {
             <CreateUser path='login/create' />
             <LoginByEmail path='login/email' />
             <Item path='item/:id' user={user} />
+            <Edit path='edit/:id' user={user} />
             <New path='new' user={user} />
           </Router>
         </main>

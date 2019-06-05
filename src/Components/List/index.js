@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { navigate } from '@reach/router';
+
+import { deleteRecipe } from '../../services/recipes';
+
 import './list.css';
 
 List.propTypes = {
@@ -12,10 +14,19 @@ List.defaultProps = {
   recipes: []
 };
 
-export default function List({ recipes }) {
+export default function List({ recipes, user, onItemDeleted }) {
   const handleItemClick = event => {
+    event.stopPropagation();
     const { id } = event.currentTarget.dataset;
     navigate(`/item/${id}`);
+  };
+
+  const handleDeleteItemClick = async event => {
+    event.stopPropagation();
+    const { id } = event.currentTarget.dataset;
+    await deleteRecipe(id, user.uid);
+    onItemDeleted(id);
+    
   };
 
   return (
@@ -27,13 +38,13 @@ export default function List({ recipes }) {
             <h3 className='list-item__title'>{item.title}</h3>
             <img className='list-item__image' src={item.image} alt={item.title} />
             <div className='list-item__buttons'>
-              <button title='צפייה' onClick={handleItemClick}>
+              <button data-id={item.id} title='צפייה' onClick={handleItemClick}>
                 <i className='fas fa-eye' />
               </button>
-              <button title='עריכה'>
+              <button data-id={item.id} title='עריכה'>
                 <i className='fas fa-edit' />
               </button>
-              <button title='מחיקה'>
+              <button data-id={item.id} title='מחיקה' onClick={handleDeleteItemClick}>
                 <i className='fas fa-trash' />
               </button>
             </div>

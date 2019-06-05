@@ -26,6 +26,10 @@ export default function Main({ user }) {
     };
   }, [user, recipes.length]);
 
+  const handleItemDeleted = id => {
+    setRecipes(recipes.filter(recipe => recipe.id !== id));
+  };
+
   /*
   useEffect(() => {
     const unSubscribe = firestore.collection('recipes').onSnapshot(snapshot => {
@@ -51,7 +55,7 @@ export default function Main({ user }) {
           <Link className='link-button' to='new'>
             להוספה של מתכון חדש
           </Link>
-          <List recipes={recipes} />
+          <List recipes={recipes} user={user} onItemDeleted={handleItemDeleted} />
         </div>
       )}
     </>

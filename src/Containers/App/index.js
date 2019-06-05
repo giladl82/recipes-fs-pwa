@@ -26,9 +26,9 @@ function App() {
       setUser(user);
 
       if (!user && window.location.pathname.indexOf('/login') < 0) {
-//        navigate('/login');
+        navigate('/login');
       } else if (user && window.location.pathname.indexOf('/login') >= 0) {
-//        navigate('/');
+        navigate('/');
       }
     });
     return () => {

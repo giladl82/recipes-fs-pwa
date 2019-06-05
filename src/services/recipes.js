@@ -5,7 +5,9 @@ const parseDoc = doc => ({
   ...doc.data()
 });
 
-export const createRecipe = async (uid, recipe) => firestore.collection('recipes').add({ ...recipe, uid });
+export const createRecipe = async (uid, recipe) => {
+  return firestore.collection('recipes').add({ ...recipe, uid });
+}
 
 export const getAllRecipesLive = () => {
   return new Promise(resolve => {

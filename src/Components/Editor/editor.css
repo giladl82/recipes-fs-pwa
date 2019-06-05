@@ -28,9 +28,29 @@
   width: 100%;
   height: 100%;
   resize: none;
+  box-sizing: border-box;
 }
 
-#nib-wrapper {
-  text-align: right;
-  direction: rtl;
+.login-form__input-hidden {
+  display: none;
+}
+
+.login-form__file-rep {
+  background-color: cadetblue;
+  padding: .1rem 2rem;
+  margin: 0  0 .5rem 0;
+  border-color: rgb(145, 195, 197);
+  color: #fff;
+  font-size: 1.4rem;
+  outline: none;
+}
+
+
+.editor__submit {
+  background-color: #009900;
+  color: #fff;
+  border-color: #13a013;
+  padding: .3rem 1rem;
+  font-size: 1.4rem;
+  outline: none;
 }

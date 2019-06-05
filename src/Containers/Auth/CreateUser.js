@@ -5,9 +5,14 @@ import './login-options.css';
 export default function CreateUser() {
   const [formValues, setValues] = useState({});
   const fileRef = useRef(null);
+
   const handleInputChange = event => {
     const newValues = { ...formValues, [event.target.id]: event.target.value };
     setValues(newValues);
+  };
+
+  const handleFileClick = evnet => {
+    fileRef.current.click();
   };
 
   const handlePasswordFieldsChange = event => {};
@@ -86,9 +91,15 @@ export default function CreateUser() {
           id='photoURL'
           accept='.gif, .jpg, .png'
         />
+        <button onClick={handleFileClick} className='login-form__file-rep'>
+          <i className='fas fa-cloud-upload-alt' /> בחר תמונה
+        </button>
 
         <div className='login-form__submit-container'>
-          <input type='submit' value='הרשמה' />
+          <button>
+            <i className='fas fa-user-check' />{' '}
+            הרשמה
+          </button>
         </div>
       </form>
     </section>

@@ -1,5 +1,5 @@
-import firebase, { firestore, firebaseAuth, firebaseStorage } from './firebase';
-
+import firebase, { firestore, firebaseAuth } from './firebase';
+import {uploadFile} from './storage'
 export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 export const createUserProfile = async (user, additionalData) => {
@@ -64,7 +64,7 @@ export const signup = async ({ email, password, displayName, photoImage }) => {
   try {
     const { user } = await firebaseAuth.createUserWithEmailAndPassword(email, password);
 
-    const photoURL = await uploadUserProfileImage(user.uid, photoImage);
+    const photoURL = await uploadFile(user.uid, photoImage);
 
     const userProfile = createUserProfile(user, {
       displayName,
@@ -92,14 +92,3 @@ export const updateProfile = (uid, displayName, photoURL) => {
   }
 };
 
-export const uploadUserProfileImage = (uid, file) => {
-  if (file) {
-    const fileType = file.name.split('.')[1];
-    const fileName = `${new Date().getTime()}.${fileType}`;
-    return firebaseStorage
-      .ref(`/users/${uid}/${fileName}`)
-      .put(file)
-      .then(response => response.ref.getDownloadURL())
-      .then(photoURL => photoURL);
-  }
-};

@@ -7,7 +7,7 @@ import './login-options.css';
 export default function Login() {
   const handleNavigateToLogin  = event => {
     event.preventDefault();
-    navigate('/login/create');
+    navigate('/login/email');
   }
   return (
     <section className='login-options'>

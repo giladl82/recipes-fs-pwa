@@ -49,7 +49,9 @@ export default function LoginByEmail() {
         <br />
         <br />
         <div className='login-form__submit-container'>
-          <input type='submit' value='הרשמה' />
+          <button>
+            <i className='fas fa-sign-in-alt' /> כניסה
+          </button>
         </div>
       </form>
       <Link to='/login/create'>משתמש חדש</Link>

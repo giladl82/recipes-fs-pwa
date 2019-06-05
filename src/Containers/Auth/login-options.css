@@ -12,7 +12,7 @@
 }
 
 .login-header__title {
-  margin: 0 0 .5em 0;
+  margin: 0 0 0.5em 0;
 }
 
 .login-options__button {
@@ -42,20 +42,29 @@
 .login-form__label {
   display: block;
   font-weight: 600;
-  margin: 0.4rem 0 .2rem 0;
+  margin: 0.4rem 0 0.2rem 0;
 }
 
 .login-form__input {
   width: 100%;
   box-sizing: border-box;
   border: solid 1px #ccc;
-  padding: .2rem .4rem;
+  padding: 0.2rem 0.4rem;
 }
 
-.login-form__input[type="file"] {
-  border: none;
+.login-form__input[type='file'] {
+  display: none;
+}
+
+.login-form__file-rep {
+  background-color: cadetblue;
+  padding: 0.1rem 2rem;
+  margin: 0 0 0.5rem 0;
+  border-color: rgb(145, 195, 197);
   color: #fff;
-  padding: .2rem 0;
+  font-size: 1.4rem;
+  outline: none;
+  width: 100%;
 }
 
 .login-form__error {
@@ -67,9 +76,12 @@
   text-align: left;
 }
 
-.login-form__submit-container input {
+.login-form__submit-container button {
   background-color: #009900;
   color: #fff;
   border-color: #13a013;
-  padding: .15rem 1rem
+  padding: .2rem 1rem;
+  font-size: 1rem;
+  margin-top: .3rem;
+  outline: none;
 }

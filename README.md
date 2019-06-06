@@ -11,8 +11,6 @@ If you like to learn more about PWA you can go the master branch which includes 
 
 ## Todo
 - Update item
-- Add an edit profile page
-- Refactor input + forms
 - Move user to context - Branch
 - Move user to store  - Branch
 - Support Live snapshots - Branch

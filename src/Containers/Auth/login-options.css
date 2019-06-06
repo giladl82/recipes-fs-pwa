@@ -1,18 +1,8 @@
-.login-options {
-  width: 280px;
-  background: #fefefe;
-  border: 2px solid #fcfcfc;
-  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
-  margin: 0 2px 15px;
-  padding: 8px 15px;
+.auth-panel {
   position: absolute;
   top: calc(50% + 37px);
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.login-header__title {
-  margin: 0 0 0.5em 0;
 }
 
 .login-options__button {
@@ -27,7 +17,7 @@
 }
 
 .login-options__button:hover {
-  border: 1px solid #0044ff;
+  border: 1px solid #3256b9;
 }
 
 .login-options__button:first-of-type {
@@ -84,4 +74,10 @@
   font-size: 1rem;
   margin-top: .3rem;
   outline: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .auth-panel {
+    width: 90%;
+  }
 }

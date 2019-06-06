@@ -14,17 +14,23 @@ List.defaultProps = {
   recipes: []
 };
 
-export default function List({ recipes, user, onItemDeleted }) {
+export default function List({ recipes, onItemDeleted }) {
   const handleItemClick = event => {
     event.stopPropagation();
     const { id } = event.currentTarget.dataset;
-    navigate(`/item/${id}`);
+    navigate(`/recipe/${id}`);
   };
+
+  const handleEditItemClick = event => {
+    event.stopPropagation();
+    const { id } = event.currentTarget.dataset;
+    navigate(`/recipe/edit/${id}`);
+  }
 
   const handleDeleteItemClick = async event => {
     event.stopPropagation();
     const { id } = event.currentTarget.dataset;
-    await deleteRecipe(id, user.uid);
+    await deleteRecipe(id);
     onItemDeleted(id);
     
   };
@@ -32,7 +38,6 @@ export default function List({ recipes, user, onItemDeleted }) {
   return (
     <div className='list'>
       {recipes.map(item => {
-        console.log(item.id);
         return (
           <div data-id={item.id} onClick={handleItemClick} className='list-item' key={item.id}>
             <h3 className='list-item__title'>{item.title}</h3>
@@ -41,7 +46,7 @@ export default function List({ recipes, user, onItemDeleted }) {
               <button data-id={item.id} title='צפייה' onClick={handleItemClick}>
                 <i className='fas fa-eye' />
               </button>
-              <button data-id={item.id} title='עריכה'>
+              <button data-id={item.id} title='עריכה' onClick={handleEditItemClick}>
                 <i className='fas fa-edit' />
               </button>
               <button data-id={item.id} title='מחיקה' onClick={handleDeleteItemClick}>

@@ -1,13 +1,15 @@
 .recipe {
-  width: 80%;
+  width: 90%;
   background: #fefefe;
   /* border: 2px solid #fcfcfc;
   box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4); */
-  margin: 0 auto;
+  margin: 1rem auto;
   padding: 15px;
   padding-bottom: 10px;
   display: block;
   min-height: calc(100vh - 160px);
+  box-sizing: border-box;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
 }
 .recipe__title {
   font-size: 3em;
@@ -26,6 +28,7 @@
 }
 
 .back-link {
+  margin: 0 5%;
   font-size: 1.3em;
   color: cornflowerblue;
 }
@@ -41,8 +44,16 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .recipe {
+    width: 100vw;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
   .back-link {
     margin: 1em;
   }
-  
+ 
+  .recipe__image  {
+    max-width: 10rem;
+  }
 }

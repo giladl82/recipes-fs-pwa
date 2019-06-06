@@ -9,6 +9,11 @@ export const createRecipe = async (uid, recipe) => {
   return firestore.collection('recipes').add({ ...recipe, uid });
 }
 
+export const updateRecipe  = async (recipe) => {
+  const recipesRef = firestore.doc(`recipes/${recipe.id}`);
+  recipesRef.update(recipe)
+}
+
 export const getAllRecipesLive = () => {
   return new Promise(resolve => {
     const unSubscribe = firestore.collection('recipes').onSnapshot(snapshot => {
@@ -33,14 +38,14 @@ export const getAllRecipes = async uid => {
   return docs;
 };
 
-export const getRecipe = async (id, uid) => {
+export const getRecipe = async id => {
   const recipesRef = firestore.doc(`recipes/${id}`);
   const doc = await recipesRef.get();
 
   return parseDoc(doc);
 };
 
-export const deleteRecipe = async (id, uid) => {
+export const deleteRecipe = async id => {
   const recipesRef = firestore.doc(`recipes/${id}`);
   await recipesRef.delete();
 };

@@ -10,7 +10,7 @@ export default function Login() {
     navigate('/login/email');
   }
   return (
-    <section className='login-options'>
+    <main className='main-container auth-panel'>
       <header>
         <h2 className='header__title'>התחבר באמצעות</h2>
       </header>
@@ -23,6 +23,6 @@ export default function Login() {
           alt='שם משתמש וסיסמא'
         />
       </button>
-    </section>
+    </main>
   );
 }

@@ -1,15 +1,33 @@
-import React, { useRef } from 'react';
-import { navigate } from '@reach/router';
+import React, { useEffect, useState } from 'react';
+import { navigate, Link } from '@reach/router';
 import Editor from '../../Components/Editor';
-import { getCurrentUser } from '../../services/auth';
-// import { updateRecipe } from '../../services/recipes';
+import { getRecipe, updateRecipe } from '../../services/recipes';
 
-export default function New({}) {
-  const user = useRef(getCurrentUser() || {});
+export default function Edit({ id, user }) {
+  const [recipe, setRecipe] = useState({});
+  useEffect(() => {
+    const loadRecipeData = async () => {
+      setRecipe(await getRecipe(id));
+    };
 
-  const handleAddRecipe = async recipe => {
-   // await updateRecipe(user.current.uid, recipe);
+    loadRecipeData();
+  }, [id]);
+
+  const handleUpdateRecipe = async recipe => {
+    await updateRecipe(recipe);
     navigate('/');
   };
-  return <Editor onSubmit={handleAddRecipe} uid={user.current.uid} />;
+  return (
+    <>
+      <Link className='back-link' to='/'>
+        חזרה לרשימת המתכונים
+      </Link>
+      <br />
+      <br />
+      {user && <Editor onSubmit={handleUpdateRecipe} uid={user.uid} recipe={recipe} />}
+      <Link className='back-link back-link__closing' to='/'>
+        חזרה לרשימת המתכונים
+      </Link>
+    </>
+  );
 }

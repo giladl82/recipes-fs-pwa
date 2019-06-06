@@ -4,7 +4,7 @@ import { getRecipe } from '../../services/recipes';
 
 import './recipe.css';
 
-export default function Item({ id, user }) {
+export default function Recipe({ id, user }) {
   const [recipe, setRecipe] = useState({});
  
   useEffect(() => {
@@ -12,6 +12,7 @@ export default function Item({ id, user }) {
       const result = await getRecipe(id, user.uid);
       setRecipe(result);
     }
+ 
     if (user && id) {
       getCurrentRecipe();
     }

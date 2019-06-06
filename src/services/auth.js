@@ -1,5 +1,5 @@
 import firebase, { firestore, firebaseAuth } from './firebase';
-import {uploadFile} from './storage'
+import { uploadFile } from './storage';
 export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 export const createUserProfile = async (user, additionalData) => {
@@ -79,6 +79,10 @@ export const signup = async ({ email, password, displayName, photoImage }) => {
 
 export const signOut = () => firebaseAuth.signOut();
 
+export const signIn = ({ email, password }) => {
+  firebaseAuth.signInWithEmailAndPassword(email, password);
+};
+
 export const updateProfile = (uid, displayName, photoURL) => {
   if (!uid) return null;
   try {
@@ -91,4 +95,3 @@ export const updateProfile = (uid, displayName, photoURL) => {
     console.log(error);
   }
 };
-

@@ -1,12 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import sanitize from 'sanitize-html';
 import { uploadFile } from '../../services/storage';
-
+import { getFileFromInput } from '../../services/utils';
 import './editor.css';
 
-export default function RecipeEditor({ uid, onSubmit }) {
-  const [formValues, setValues] = useState({});
+export default function RecipeEditor({ uid, onSubmit, recipe }) {
+  const [formValues, setValues] = useState(recipe ? recipe : {});
   const fileRef = useRef(null);
+
+  useEffect(() => {
+    setValues(recipe);
+  }, [uid, recipe]);
 
   const setFormValues = (key, value) => {
     const newValues = { ...formValues, [key]: value };
@@ -27,9 +31,8 @@ export default function RecipeEditor({ uid, onSubmit }) {
   const handleSubmit = async event => {
     event.preventDefault();
     event.stopPropagation();
-    const photoImage =
-      fileRef.current && fileRef.current.files && fileRef.current.files[0] ? fileRef.current.files[0] : null;
-    const photoURL = await uploadFile(uid, photoImage);
+    const photoImage = getFileFromInput(fileRef.current);
+    const photoURL = photoImage ? await uploadFile(uid, photoImage) : formValues.image;
     const dataToSave = setFormValues('image', photoURL);
 
     onSubmit(dataToSave);
@@ -37,22 +40,36 @@ export default function RecipeEditor({ uid, onSubmit }) {
 
   return (
     <div className='editor'>
-      <input className='editor__title' onChange={handleInputChange} name='title' type='text' />
+      <label className='form__label' htmlFor='title'>
+        כותרת
+      </label>
       <input
-        className='login-form__input login-form__input-hidden'
+        id='title'
+        className='form__input'
+        value={formValues.title || ''}
+        onChange={handleInputChange}
+        name='title'
+        type='text'
+      />
+      <input
+        className='form__input--hidden'
         type='file'
         ref={fileRef}
         id='photoURL'
         required
         accept='.gif, .jpg, .png'
       />
-      <button onClick={handleFileClick} className='login-form__file-rep'>
+      <br />
+      <button onClick={handleFileClick} className='form__file-rep'>
         <i className='fas fa-cloud-upload-alt' /> בחר תמונה
       </button>
-      <div className='editor__content'>
-        <textarea className='editor__content__input' name='text' onChange={handleInputChange} />
-      </div>
-      <button className='editor__submit' onClick={handleSubmit}>
+      <label className='form__label' htmlFor='text'>
+        המתכון
+      </label>
+
+      <textarea id='text' value={formValues.text ? formValues.text.replace(/<br\s*[/]?>/gi, '\n') : ''} className='form__input--multiline' name='text' onChange={handleInputChange} />
+
+      <button className='form__submit' onClick={handleSubmit}>
         <i className='fas fa-check' /> שמירה
       </button>
     </div>

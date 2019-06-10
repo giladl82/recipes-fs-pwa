@@ -16,11 +16,12 @@
   display: flex;
   flex-direction: column;
   column-break-inside: avoid;
+  width: 26rem;
 }
 
 .list-item__title {
   font-size: 1.7rem;
-  word-wrap: none;
+  word-wrap: break-word;
   flex-grow: 1;
 }
 
@@ -28,12 +29,12 @@
   max-width: 20rem;
   justify-self: center;
   border: solid 1px #ccc;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
   align-self: center;
 }
 
 .list-item__buttons {
-  margin: .5rem 0;
+  margin: 0.5rem 0;
   align-self: flex-end;
   order: 3;
   display: flex;
@@ -61,7 +62,7 @@
     font-size: 1.3rem;
     word-wrap: none;
     order: 2;
-    margin: 0;
+    margin-top: 1rem;
   }
 
   .list-item__image {
@@ -72,7 +73,7 @@
   }
 
   .list-item__buttons {
-    align-self: center;
-    margin-top: -1.5rem
+    align-self: flex-end;
+    margin-top: 1.5rem;
   }
 }

@@ -6,12 +6,14 @@ import { getFileFromInput } from '../../services/utils';
 import './editor.css';
 
 export default function RecipeEditor({ uid, recipe, onSubmit }) {
-  const [formValues, setValues] = useState(recipe ? recipe : {});
+  const [formValues, setValues] = useState({});
   const fileRef = useRef(null);
 
-  useEffect(() => {
-    setValues(recipe);
-  }, [uid, recipe]);
+   useEffect(() => {
+     if (recipe) {
+       setValues(recipe);
+     }
+   }, [uid, recipe]);
 
   const setFormValues = (key, value) => {
     const newValues = { ...formValues, [key]: value };
@@ -34,7 +36,7 @@ export default function RecipeEditor({ uid, recipe, onSubmit }) {
     event.stopPropagation();
     const photoImage = getFileFromInput(fileRef.current);
     const photoURL = photoImage ? await uploadFile(uid, photoImage) : formValues.image;
-    const dataToSave = setFormValues('image', photoURL);
+    const dataToSave = setFormValues('image', photoURL || '');
 
     onSubmit(dataToSave);
   };

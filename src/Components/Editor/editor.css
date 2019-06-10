@@ -8,12 +8,12 @@
   flex-direction: column;
   padding: 1.5rem;
   height: calc(100vh - 170px);
-
+  max-width: 60%;
+  margin: auto;
 }
 
 @media only screen and (max-width: 600px) {
   .editor {
     width: 90%;
-    margin: auto;
   }
 }

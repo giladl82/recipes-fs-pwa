@@ -13,6 +13,7 @@ export default function Main({ user }) {
     async function getRecipes() {
       if (user) {
         const docs = await getAllRecipes(user.uid);
+        debugger
         setRecipes(docs);
       }
 
@@ -25,7 +26,7 @@ export default function Main({ user }) {
     return () => {
       return null;
     };
-  }, [user, recipes.length]);
+  }, []);
 
   const handleItemDeleted = id => {
     setRecipes(recipes.filter(recipe => recipe.id !== id));

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { navigate, Link } from '@reach/router';
 import Editor from '../../Components/Editor';
 import { getRecipe, updateRecipe } from '../../services/recipes';
@@ -19,15 +20,22 @@ export default function Edit({ id, user }) {
   };
   return (
     <>
-      <Link className='back-link' to='/'>
+      <Link className="back-link" to="/">
         חזרה לרשימת המתכונים
       </Link>
       <br />
       <br />
       {user && <Editor onSubmit={handleUpdateRecipe} uid={user.uid} recipe={recipe} />}
-      <Link className='back-link back-link__closing' to='/'>
+      <Link className="back-link back-link__closing" to="/">
         חזרה לרשימת המתכונים
       </Link>
     </>
   );
 }
+
+Edit.propTypes = {
+  id: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    uid: PropTypes.string.isRequired
+  }).isRequired
+};

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import sanitize from 'sanitize-html';
 import { uploadFile } from '../../services/storage';
 import { getFileFromInput } from '../../services/utils';
 import './editor.css';
 
-export default function RecipeEditor({ uid, onSubmit, recipe }) {
+export default function RecipeEditor({ uid, recipe, onSubmit }) {
   const [formValues, setValues] = useState(recipe ? recipe : {});
   const fileRef = useRef(null);
 
@@ -39,39 +40,56 @@ export default function RecipeEditor({ uid, onSubmit, recipe }) {
   };
 
   return (
-    <div className='editor'>
-      <label className='form__label' htmlFor='title'>
+    <div className="editor">
+      <label className="form__label" htmlFor="title">
         כותרת
       </label>
       <input
-        id='title'
-        className='form__input'
+        id="title"
+        className="form__input"
         value={formValues.title || ''}
         onChange={handleInputChange}
-        name='title'
-        type='text'
+        name="title"
+        type="text"
       />
       <input
-        className='form__input--hidden'
-        type='file'
+        className="form__input--hidden"
+        type="file"
         ref={fileRef}
-        id='photoURL'
+        id="photoURL"
         required
-        accept='.gif, .jpg, .png'
+        accept=".gif, .jpg, .png"
       />
       <br />
-      <button onClick={handleFileClick} className='form__file-rep'>
-        <i className='fas fa-cloud-upload-alt' /> בחר תמונה
+      <button onClick={handleFileClick} className="form__file-rep">
+        <i className="fas fa-cloud-upload-alt" /> בחר תמונה
       </button>
-      <label className='form__label' htmlFor='text'>
+      <label className="form__label" htmlFor="text">
         המתכון
       </label>
 
-      <textarea id='text' value={formValues.text ? formValues.text.replace(/<br\s*[/]?>/gi, '\n') : ''} className='form__input--multiline' name='text' onChange={handleInputChange} />
+      <textarea
+        id="text"
+        value={formValues.text ? formValues.text.replace(/<br\s*[/]?>/gi, '\n') : ''}
+        className="form__input--multiline"
+        name="text"
+        onChange={handleInputChange}
+      />
 
-      <button className='form__submit' onClick={handleSubmit}>
-        <i className='fas fa-check' /> שמירה
+      <button className="form__submit" onClick={handleSubmit}>
+        <i className="fas fa-check" /> שמירה
       </button>
     </div>
   );
 }
+
+RecipeEditor.propTypes = {
+  uid: PropTypes.string.isRequired,
+  recipe: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    text: PropTypes.string,
+    image: PropTypes.string
+  }),
+  onSubmit: PropTypes.func.isRequired
+};

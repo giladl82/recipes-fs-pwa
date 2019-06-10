@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { getFileFromInput } from '../../services/utils';
 
 export default function RegisterForm({ onSignup }) {
@@ -91,3 +92,7 @@ export default function RegisterForm({ onSignup }) {
     </form>
   );
 }
+
+RegisterForm.propTypes = {
+  onSignup: PropTypes.func.isRequired
+};

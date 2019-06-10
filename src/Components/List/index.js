@@ -6,14 +6,6 @@ import { deleteRecipe } from '../../services/recipes';
 
 import './list.css';
 
-List.propTypes = {
-  recipes: PropTypes.array.isRequired
-};
-
-List.defaultProps = {
-  recipes: []
-};
-
 export default function List({ recipes, onItemDeleted }) {
   const handleItemClick = event => {
     event.stopPropagation();
@@ -25,32 +17,31 @@ export default function List({ recipes, onItemDeleted }) {
     event.stopPropagation();
     const { id } = event.currentTarget.dataset;
     navigate(`/recipe/edit/${id}`);
-  }
+  };
 
   const handleDeleteItemClick = async event => {
     event.stopPropagation();
     const { id } = event.currentTarget.dataset;
     await deleteRecipe(id);
     onItemDeleted(id);
-    
   };
 
   return (
-    <div className='list'>
+    <div className="list">
       {recipes.map(item => {
         return (
-          <div data-id={item.id} onClick={handleItemClick} className='list-item' key={item.id}>
-            <h3 className='list-item__title'>{item.title}</h3>
-            <img className='list-item__image' src={item.image} alt={item.title} />
-            <div className='list-item__buttons'>
-              <button data-id={item.id} title='צפייה' onClick={handleItemClick}>
-                <i className='fas fa-eye' />
+          <div data-id={item.id} onClick={handleItemClick} className="list-item" key={item.id}>
+            <h3 className="list-item__title">{item.title}</h3>
+            <img className="list-item__image" src={item.image} alt={item.title} />
+            <div className="list-item__buttons">
+              <button data-id={item.id} title="צפייה" onClick={handleItemClick}>
+                <i className="fas fa-eye" />
               </button>
-              <button data-id={item.id} title='עריכה' onClick={handleEditItemClick}>
-                <i className='fas fa-edit' />
+              <button data-id={item.id} title="עריכה" onClick={handleEditItemClick}>
+                <i className="fas fa-edit" />
               </button>
-              <button data-id={item.id} title='מחיקה' onClick={handleDeleteItemClick}>
-                <i className='fas fa-trash' />
+              <button data-id={item.id} title="מחיקה" onClick={handleDeleteItemClick}>
+                <i className="fas fa-trash" />
               </button>
             </div>
           </div>
@@ -59,3 +50,12 @@ export default function List({ recipes, onItemDeleted }) {
     </div>
   );
 }
+
+List.propTypes = {
+  recipes: PropTypes.array.isRequired,
+  onItemDeleted: PropTypes.func.isRequired
+};
+
+List.defaultProps = {
+  recipes: []
+};

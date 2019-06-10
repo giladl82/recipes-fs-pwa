@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 export default function LoginForm({ onLogin }) {
   const [formValues, setValues] = useState({});
@@ -15,31 +16,35 @@ export default function LoginForm({ onLogin }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label className='form__label' htmlFor='email'>
+      <label className="form__label" htmlFor="email">
         כתובת דוא"ל
       </label>
-      <input className='form__input' onChange={handleInputChange} type='email' id='email' name='email' required />
+      <input className="form__input" onChange={handleInputChange} type="email" id="email" name="email" required />
 
-      <label className='form__label' htmlFor='password'>
+      <label className="form__label" htmlFor="password">
         סיסמה
       </label>
       <input
-        className='form__input'
+        className="form__input"
         onChange={handleInputChange}
-        type='password'
-        id='password'
-        name='password'
+        type="password"
+        id="password"
+        name="password"
         required
         minLength={6}
-        autoComplete='new-password'
+        autoComplete="new-password"
       />
       <br />
       <br />
-      <div className='form__submit-container'>
-        <button className='form__submit'>
-          <i className='fas fa-sign-in-alt' /> כניסה
+      <div className="form__submit-container">
+        <button className="form__submit">
+          <i className="fas fa-sign-in-alt" /> כניסה
         </button>
       </div>
     </form>
   );
 }
+
+LoginForm.propTypes = {
+  onLogin: PropTypes.func.isRequired
+};

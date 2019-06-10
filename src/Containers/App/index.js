@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Router, Link, navigate } from '@reach/router';
 import { onAuthStateChanged, createUserProfile } from '../../services/auth';
 
 import logo from './logo.svg';
-import Main from '../Main';
-import New from '../New';
-import Edit from '../Edit';
-import LoginOptions from '../Auth/LoginOptions';
-import Login from '../Auth/Login';
-import Register from '../Auth/Register';
-import Recipe from '../Recipe';
-
 import UserDisplay from '../../Components/Auth/UserDisplay';
-
 import './app.css';
+
+const Main = lazy(() => import('../Main'));
+const New = lazy(() => import('../New'));
+const Edit = lazy(() => import('../Edit'));
+const LoginOptions = lazy(() => import('../Auth/LoginOptions'));
+const Login = lazy(() => import('../Auth/Login'));
+const Register = lazy(() => import('../Auth/Register'));
+const Recipe = lazy(() => import('../Recipe'));
 
 function App() {
   const [user, setUser] = useState();
@@ -42,17 +41,17 @@ function App() {
   }, []);
 
   return (
-    <div className='app'>
-      <header className='header'>
-        <h1 className='header__title'>
+    <div className="app">
+      <header className="header">
+        <h1 className="header__title">
           {user ? (
-            <Link to='/'>
-              <img className='header__logo' src={logo} alt='ספר המתכונים שלי' />
+            <Link to="/">
+              <img className="header__logo" src={logo} alt="ספר המתכונים שלי" />
               ספר המתכונים שלי
             </Link>
           ) : (
             <>
-              <img className='header__logo' src={logo} alt='ספר המתכונים שלי' />
+              <img className="header__logo" src={logo} alt="ספר המתכונים שלי" />
               ספר המתכונים שלי
             </>
           )}
@@ -60,17 +59,19 @@ function App() {
         <UserDisplay user={user} />
       </header>
       {ready && (
-        <main className='container'>
-          <Router>
-            <Main path='/' user={user} />
-            <LoginOptions path='login' />
-            <Login path='login/email' />
-            <Register path='login/create' />
-            <Recipe path='recipe/:id' user={user} />
-            <Edit path='recipe/edit/:id' user={user} />
-            <New path='new' user={user} />
-          </Router>
-        </main>
+        <Suspense fallback={null}>
+          <main className="container">
+            <Router>
+              <Main path="/" user={user} />
+              <LoginOptions path="login" />
+              <Login path="login/email" />
+              <Register path="login/create" />
+              <Recipe path="recipe/:id" user={user} />
+              <Edit path="recipe/edit/:id" user={user} />
+              <New path="new" user={user} />
+            </Router>
+          </main>
+        </Suspense>
       )}
     </div>
   );

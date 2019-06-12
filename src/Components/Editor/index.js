@@ -7,13 +7,16 @@ import './editor.css';
 
 export default function RecipeEditor({ uid, recipe, onSubmit }) {
   const [formValues, setValues] = useState({});
-  const fileRef = useRef(null);
+  const fileRef = useRef();
+  const editorRef = useRef();
 
-   useEffect(() => {
-     if (recipe) {
-       setValues(recipe);
-     }
-   }, [uid, recipe]);
+  useEffect(() => {
+    const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    editorRef.current.style.height = `${height - 170}px`;
+    if (recipe) {
+      setValues(recipe);
+    }
+  }, [uid, recipe]);
 
   const setFormValues = (key, value) => {
     const newValues = { ...formValues, [key]: value };
@@ -42,44 +45,44 @@ export default function RecipeEditor({ uid, recipe, onSubmit }) {
   };
 
   return (
-    <div className="editor">
-      <label className="form__label" htmlFor="title">
+    <div className='editor' ref={editorRef}>
+      <label className='form__label' htmlFor='title'>
         כותרת
       </label>
       <input
-        id="title"
-        className="form__input"
+        id='title'
+        className='form__input'
         value={formValues.title || ''}
         onChange={handleInputChange}
-        name="title"
-        type="text"
+        name='title'
+        type='text'
       />
       <input
-        className="form__input--hidden"
-        type="file"
+        className='form__input--hidden'
+        type='file'
         ref={fileRef}
-        id="photoURL"
+        id='photoURL'
         required
-        accept=".gif, .jpg, .png"
+        accept='.gif, .jpg, .png'
       />
       <br />
-      <button onClick={handleFileClick} className="form__file-rep">
-        <i className="fas fa-cloud-upload-alt" /> בחר תמונה
+      <button onClick={handleFileClick} className='form__file-rep'>
+        <i className='fas fa-cloud-upload-alt' /> בחר תמונה
       </button>
-      <label className="form__label" htmlFor="text">
+      <label className='form__label' htmlFor='text'>
         המתכון
       </label>
 
       <textarea
-        id="text"
+        id='text'
         value={formValues.text ? formValues.text.replace(/<br\s*[/]?>/gi, '\n') : ''}
-        className="form__input--multiline"
-        name="text"
+        className='form__input--multiline'
+        name='text'
         onChange={handleInputChange}
       />
 
-      <button className="form__submit" onClick={handleSubmit}>
-        <i className="fas fa-check" /> שמירה
+      <button className='form__submit' onClick={handleSubmit}>
+        <i className='fas fa-check' /> שמירה
       </button>
     </div>
   );

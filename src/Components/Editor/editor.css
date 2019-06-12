@@ -14,6 +14,6 @@
 
 @media only screen and (max-width: 600px) {
   .editor {
-    width: 90%;
+    max-width: 90%;
   }
 }

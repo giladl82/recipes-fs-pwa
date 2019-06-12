@@ -8,7 +8,6 @@
   color: #ffffff;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0px 0px 3px #333;
 }
 
 .header a {
@@ -20,6 +19,7 @@
   font-size: 2.4rem;
   padding: 0.8rem 1.4rem;
   margin: 0;
+  text-shadow: black 1px 1px 6px;
 }
 
 .header__logo {
@@ -42,6 +42,6 @@
   }
 
   .header__title {
-    font-size: 1rem;
+    font-size: 2rem;
   }
 }

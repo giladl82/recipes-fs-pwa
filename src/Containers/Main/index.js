@@ -5,6 +5,7 @@ import { Link } from '@reach/router';
 import { getAllRecipes } from '../../services/recipes';
 import { setRecipes } from '../../store/Recipes/actions';
 import List from '../../Components/List';
+import loader from './loader.gif'
 
 import './main.css';
 
@@ -21,7 +22,9 @@ export default function Main({ user }) {
         dispatch(setRecipes(docs));
       }
 
-      setLoadingState(false);
+      setTimeout(() => {
+        setLoadingState(false);
+      }, 1300);
     }
 
     if (user) {
@@ -39,7 +42,7 @@ export default function Main({ user }) {
   return (
     <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <img className='loading' src={loader} alt='' />
       ) : (
         <div className='list-container'>
           <Link className='link-button' to='new'>

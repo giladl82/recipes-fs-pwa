@@ -1,5 +1,5 @@
 import { firestore } from './firebase';
-
+import { useSelector } from 'react-redux';
 const parseDoc = doc => ({
   id: doc.id,
   ...doc.data()
@@ -7,32 +7,37 @@ const parseDoc = doc => ({
 
 export const createRecipe = async (uid, recipe) => {
   return firestore.collection('recipes').add({ ...recipe, uid });
-}
+};
 
-export const updateRecipe  = async (recipe) => {
+export const updateRecipe = async recipe => {
   const recipesRef = firestore.doc(`recipes/${recipe.id}`);
-  recipesRef.update(recipe)
-}
+  recipesRef.update(recipe);
+};
 
 export const getAllRecipesLive = () => {
   return new Promise(resolve => {
-    const unSubscribe = firestore.collection('recipes').orderBy('title')
-    .onSnapshot(snapshot => {
-      const docs = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
+    const unSubscribe = firestore
+      .collection('recipes')
+      .orderBy('title')
+      .onSnapshot(snapshot => {
+        const docs = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
 
-      resolve({
-        docs,
-        unSubscribe
+        resolve({
+          docs,
+          unSubscribe
+        });
       });
-    });
   });
 };
 
 export const getAllRecipes = async uid => {
-  const recipesRef = firestore.collection('recipes').where('uid', '==', uid).orderBy('title', 'asc');
+  const recipesRef = firestore
+    .collection('recipes')
+    .where('uid', '==', uid)
+    .orderBy('title', 'asc');
   const snapshot = await recipesRef.get();
   const docs = snapshot.docs.map(doc => parseDoc(doc));
 

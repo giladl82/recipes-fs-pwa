@@ -21,9 +21,11 @@ export default function List({ recipes, onItemDeleted }) {
 
   const handleDeleteItemClick = async event => {
     event.stopPropagation();
-    const { id } = event.currentTarget.dataset;
-    await deleteRecipe(id);
-    onItemDeleted(id);
+    if(window.confirm('האם אתה למחוק מתכון זה?')) {
+      const { id } = event.currentTarget.dataset;
+      await deleteRecipe(id);
+      onItemDeleted(id);
+    }
   };
 
   return (

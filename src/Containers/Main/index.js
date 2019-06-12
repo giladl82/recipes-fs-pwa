@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from '@reach/router';
-import List from '../../Components/List';
 import { getAllRecipes } from '../../services/recipes';
+import { setRecipes } from '../../store/Recipes/actions';
+import List from '../../Components/List';
+
 import './main.css';
 
 export default function Main({ user }) {
+  const dispatch = useDispatch();
+  const recipes = useSelector(state => state.recipes);
   const [isLoading, setLoadingState] = useState(true);
-  const [recipes, setRecipes] = useState([]);
+  // const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     async function getRecipes() {
       if (user) {
         const docs = await getAllRecipes(user.uid);
-        setRecipes(docs);
+        dispatch(setRecipes(docs));
       }
 
       setLoadingState(false);
@@ -36,8 +41,8 @@ export default function Main({ user }) {
       {isLoading ? (
         <h1>Loading...</h1>
       ) : (
-        <div className="list-container">
-          <Link className="link-button" to="new">
+        <div className='list-container'>
+          <Link className='link-button' to='new'>
             להוספה של מתכון חדש
           </Link>
           <List recipes={recipes} user={user} onItemDeleted={handleItemDeleted} />

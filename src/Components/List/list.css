@@ -3,6 +3,7 @@
   column-gap: 15px; */
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 .list-item {
   cursor: pointer;
@@ -22,12 +23,10 @@
 .list-item__title {
   font-size: 1.7rem;
   word-wrap: break-word;
-  flex-grow: 1;
 }
 
 .list-item__image {
   max-width: 20rem;
-  justify-self: center;
   border: solid 1px #ccc;
   border-radius: 0.3rem;
   align-self: center;
@@ -38,6 +37,7 @@
   align-self: flex-end;
   order: 3;
   display: flex;
+  flex-grow: 1;
 }
 
 .list-item__buttons button {
@@ -67,9 +67,9 @@
 
   .list-item__image {
     grid-column-start: 1;
-    margin: 0 1rem;
+    margin: 0 1rem .5rem 1rem;
     order: 1;
-    max-height: 6rem;
+    max-height: 10rem;
   }
 
   .list-item__buttons {

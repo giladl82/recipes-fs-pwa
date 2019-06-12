@@ -1,5 +1,5 @@
 .recipe {
-  width: 90%;
+  width: 60%;
   background: #fefefe;
   /* border: 2px solid #fcfcfc;
   box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4); */
@@ -29,15 +29,14 @@
 
 @media only screen and (max-width: 600px) {
   .recipe {
-    width: 100vw;
+    width: 90%;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
-  .back-link {
-    margin: 1em;
-  }
 
   .recipe__image  {
-    max-width: 10rem;
+    max-width: 100%;
+    float: none;
+    margin: auto;
   }
 }

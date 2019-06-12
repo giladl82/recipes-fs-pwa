@@ -3,6 +3,7 @@
   top: calc(50% + 37px);
   left: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .auth-panel .header__title {
@@ -29,7 +30,7 @@
 }
 
 .login-options__button img {
-  height: 3rem;
+  height: 4rem;
   vertical-align: middle;
 }
 

@@ -5,7 +5,7 @@ import { Link } from '@reach/router';
 import { getAllRecipes } from '../../services/recipes';
 import { setRecipes } from '../../store/Recipes/actions';
 import List from '../../Components/List';
-import loader from './loader.gif'
+import loader from './loader.gif';
 
 import './main.css';
 
@@ -22,9 +22,7 @@ export default function Main({ user }) {
         dispatch(setRecipes(docs));
       }
 
-      setTimeout(() => {
-        setLoadingState(false);
-      }, 1300);
+      setLoadingState(false);
     }
 
     if (user) {
@@ -36,7 +34,7 @@ export default function Main({ user }) {
   }, [user]);
 
   const handleItemDeleted = id => {
-    setRecipes(recipes.filter(recipe => recipe.id !== id));
+    dispatch(setRecipes(recipes.filter(recipe => recipe.id !== id)));
   };
 
   return (

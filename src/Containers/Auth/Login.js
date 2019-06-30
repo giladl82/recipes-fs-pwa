@@ -11,12 +11,12 @@ export default function Login() {
   };
 
   return (
-    <main className='main-container auth-panel'>
+    <section className='main-container auth-panel'>
       <header>
         <h2 className='header__title'>כניסה</h2>
       </header>
       <LoginForm onLogin={handleLogin} />
-      <Link to='/login/create'>משתמש חדש</Link>
-    </main>
+      <Link className='auth-panel__register-link' to='/login/create'>משתמש חדש</Link>
+    </section>
   );
 }

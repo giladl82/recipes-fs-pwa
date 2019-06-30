@@ -28,8 +28,9 @@ body {
 .form__label {
   display: block;
   font-weight: 600;
-  margin: 0.4rem 0 0.2rem 0;
+  margin: 1rem 0 .2rem;
   font-size: 1.7rem;
+  text-align: right;
 }
 
 .form__input {
@@ -52,7 +53,7 @@ body {
   font-size: 2rem;
   margin-top: 0.3rem;
   outline: none;
-  height: 7rem;
+  height: 4rem;
 }
 
 .form__input--hidden {
@@ -67,7 +68,7 @@ body {
   color: #fff;
   font-size: 2rem;
   outline: none;
-  height: 7rem;
+  height: 4rem;
 }
 
 .form__input--multiline {

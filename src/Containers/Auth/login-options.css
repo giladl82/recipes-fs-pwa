@@ -4,10 +4,21 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  min-width: 30rem;
 }
 
 .auth-panel .header__title {
   padding: 0.8rem 0;
+  text-align: right;
+}
+
+.auth-panel__register-link {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 2rem;
+  font-size: 1.2rem;
+  color: royalblue;
+  font-weight: 500;
 }
 
 .login-options__button {
@@ -75,9 +86,9 @@
   background-color: #009900;
   color: #fff;
   border-color: #13a013;
-  padding: .2rem 1rem;
+  padding: 0.2rem 1rem;
   font-size: 1rem;
-  margin-top: .3rem;
+  margin-top: 0.3rem;
   outline: none;
 }
 

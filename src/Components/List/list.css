@@ -1,8 +1,7 @@
 .list {
-  /* column-width: 100%;
-  column-gap: 15px; */
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(26rem, 26rem));
 }
 .list-item {
   cursor: pointer;
@@ -16,12 +15,7 @@
   display: flex;
   flex-direction: column;
   column-break-inside: avoid;
-  width: 26rem;
-}
-
-.list-item:first-of-type {
-  margin:  0 0 1rem 0;
-}
+} 
 
 .list-item__title {
   font-size: 1.7rem;
@@ -52,7 +46,7 @@
 
 @media only screen and (max-width: 600px) {
   .list {
-    column-width: unset;
+    grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
   }
 
   .list-item {
@@ -70,7 +64,7 @@
 
   .list-item__image {
     grid-column-start: 1;
-    margin: 0 1rem .5rem 1rem;
+    margin: 0 1rem 0.5rem 1rem;
     order: 1;
     max-height: 10rem;
   }

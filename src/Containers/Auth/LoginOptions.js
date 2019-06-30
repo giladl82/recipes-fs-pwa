@@ -10,7 +10,7 @@ export default function Login() {
     navigate('/login/email');
   }
   return (
-    <main className='main-container auth-panel'>
+    <section className='main-container auth-panel'>
       <header>
         <h2 className='header__title'>התחבר באמצעות</h2>
       </header>
@@ -19,10 +19,10 @@ export default function Login() {
       </button>
       <button className='login-options__button' onClick={handleNavigateToLogin}>
         <img
-          src='https://www.totaldigitalsecurity.com/hs-fs/hubfs/TDS%20Brand%20Icons/TDS%20brand%20icon-%20private%20email%20account.png?width=614&name=TDS%20brand%20icon-%20private%20email%20account.png'
+          src='/account.png'
           alt='שם משתמש וסיסמא'
         />
       </button>
-    </main>
+    </section>
   );
 }

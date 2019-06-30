@@ -10,6 +10,7 @@
     "@reach/router": "^1.2.1",
     "firebase": "^6.0.2",
     "firebase-tools": "^6.10.0",
+    "idb": "^4.0.3",
     "nib-core": "^0.3.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
